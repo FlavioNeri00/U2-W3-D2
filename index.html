@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Saved:</h1>
+    <ul id="list"></ul>
+    <input type="text" id="input" />
+    <button onclick="saveInfo()">Save</button>
+    <button onclick="deleteInfo()">Delete</button>
+
+    <h2 id="timer"></h2>
+
+    <script>
+      const saveInfo = () => {
+        const input = document.getElementById("input").value;
+        localStorage.setItem("info", input);
+
+        const list = document.getElementById("list");
+        let listElement = document.createElement("ul");
+        listElement.innerText = input;
+
+        list.appendChild(listElement);
+      };
+
+      const deleteInfo = () => {
+        localStorage.removeItem("info");
+      };
+
+      let timer = sessionStorage.getItem("count") ? sessionStorage.getItem("count") : 0;
+
+      const count = () => {
+        timer = timer + 1;
+        let countDown = (document.getElementById("timer").innerText = timer);
+        sessionStorage.setItem("count", timer);
+      };
+
+      setInterval(count, 1000);
+    </script>
+  </body>
+</html>
